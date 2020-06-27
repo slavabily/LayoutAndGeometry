@@ -8,9 +8,40 @@
 
 import SwiftUI
 
+extension VerticalAlignment {
+    struct MidAccountAndName: AlignmentID {
+        static func defaultValue(in d: ViewDimensions) -> CGFloat {
+            d[.top]
+        }
+    }
+    
+    static let midAccountAndName = VerticalAlignment(MidAccountAndName.self)
+}
+
 struct ContentView: View {
     var body: some View {
-        Text("Hello, World!")
+        HStack(alignment: .midAccountAndName) {
+            VStack {
+                Text("@twostaws")
+                    .alignmentGuide(.midAccountAndName) { (d) -> CGFloat in
+                        d[VerticalAlignment.center]
+                }
+                Text("jkhkjhlkjhl")
+                Image("apollo10")
+                .resizable()
+                    .frame(width: 64, height: 64)
+            }
+            
+            VStack {
+                Text("fhgfjhgfjhgf")
+                Text("Full name:")
+                Text("PAUL HUDSON")
+                    .alignmentGuide(.midAccountAndName, computeValue: { (d) -> CGFloat in
+                        d[VerticalAlignment.center]
+                    })
+                    .font(.largeTitle)
+            }
+        }
     }
 }
 
